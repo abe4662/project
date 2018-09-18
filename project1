@@ -6,15 +6,15 @@ print("testing")
 import numpy as np
 from matplotlib import pyplot as plt
 
-ump = 0.24 #hr^-1
-umb = 0.25 #hr^-1
-Kb = 4E8 #bacteria/mL
-KS = 5E-4 #mg glucose/mL
+ump = 0.24 #maximum specific growth rate for protozoa (hr^-1)
+umb = 0.25 #maximum specific growth rate for bacteria (hr^-1)
+Kb = 4E8 #saturation constant for bacteria (bacteria/mL)
+KS = 5E-4 #saturation constant mg of glucose/mL
 Yp = 7.14E-4 #protozoa/bacteria
 Yb = 3.03E9 bacteria/mg of glucose
 S0 = 0.5  #feed concentration of glucose
 D = 0.0625 #dilution rate
-S = 0
+S = 0 #substrate concentration
 Xp = 1.4E4
 Xb = 1.6E9
 
@@ -23,3 +23,5 @@ t0 = 0
 n = 36001
 dt = (tf - t0)/(n-1)
 t = np.linspace(t0, tf, n)
+
+#initializing vectors for p (prey), b (bacteria), s (substrate)
