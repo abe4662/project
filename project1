@@ -32,3 +32,5 @@ s = np.zeros([n])
 p[0] = Xp
 b[0] = Xb
 s[0] = S
+
+#Euler method
