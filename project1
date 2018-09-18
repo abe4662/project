@@ -25,3 +25,10 @@ dt = (tf - t0)/(n-1)
 t = np.linspace(t0, tf, n)
 
 #initializing vectors for p (prey), b (bacteria), s (substrate)
+p = np.zeros([n])
+b = np.zeros([n])
+s = np.zeros([n])
+
+p[0] = Xp
+b[0] = Xb
+s[0] = S
