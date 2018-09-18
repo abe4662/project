@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 ump = 0.24 #maximum specific growth rate for protozoa (hr^-1)
 umb = 0.25 #maximum specific growth rate for bacteria (hr^-1)
 Kb = 4E8 #saturation constant for bacteria (bacteria/mL)
-KS = 5E-4 #saturation constant for substrate (mg of glucose/mL)
+Ks = 5E-4 #saturation constant for substrate (mg of glucose/mL)
 Yp/b = 7.14E-4 #yield coefficient of protozoa on bacteria (protozoa/bacteria)
 Yb/s = 3.03E9 #yield coefficient of bacteria on substrate (bacteria/mg of glucose)
 D = 0.0625 #dilution rate
@@ -37,4 +37,5 @@ s[0] = S
 
 #Euler method
 for i in range(1,n):
-    p(i)= -D
+    p(i)= dt*(-D*Xp)+((ump*Xb*Xp)/(Kb+Ks))
+    
