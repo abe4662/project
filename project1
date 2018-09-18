@@ -6,6 +6,7 @@ print("testing")
 import numpy as np
 from matplotlib import pyplot as plt
 
+#Defining variables and constants
 ump = 0.24 #maximum specific growth rate for protozoa (hr^-1)
 umb = 0.25 #maximum specific growth rate for bacteria (hr^-1)
 Kb = 4E8 #saturation constant for bacteria (bacteria/mL)
@@ -18,13 +19,14 @@ S = 0 #initial substrate concentration
 Xp = 1.4E4 #initial protozoa concentration
 Xb = 1.6E9 #initial bacteria concentration
 
+#Step size and number of iterations
 tf = 360
 t0 = 0
 n = 36001
 dt = (tf - t0)/(n-1)
 t = np.linspace(t0, tf, n)
 
-#initializing vectors for p (prey), b (bacteria), s (substrate)
+#initializing vectors for p (prey), b (bacteria), s (substrate) material balance
 p = np.zeros([n])
 b = np.zeros([n])
 s = np.zeros([n])
@@ -34,3 +36,5 @@ b[0] = Xb
 s[0] = S
 
 #Euler method
+for i in range(1,n):
+    p(i)= -D
