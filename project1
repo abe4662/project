@@ -46,3 +46,10 @@ plt.title("predator vs. time")
 plt.xlabel("time (days)")
 plt.ylabel("concentration of protozoa")
 plt.show()
+
+
+
+for i in range(1,n):
+    p[i]= dt*(-D*Xp[i-1]+ump*Xb[i-1]*Xp[i-1]/((Kb+Xb[i-1])))+Xp[i-1]
+    b[i]= dt*(-D*Xb[i-1]+umb*s[i-1]*Xb[i-1]/(Ks+s[i-1])-1/Ypb*ump*Xb[i-1]*Xp[i-1]/(Kb+Xb[i-1]))+Xb[i-1]
+    s[i]= dt*(D*(S0-s[i-1])-(1/Ybs*umb*s[i-1]*Xb[i-1])/(Ks+s[i-1]))+s[i-1]
