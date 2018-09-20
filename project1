@@ -44,3 +44,110 @@ plt.title("predator vs. time")
 plt.xlabel("time (days)")
 plt.ylabel("concentration of protozoa")
 plt.show()
+
+#Phase plot for Protozoa vs. Bacteria and Bacteria vs. Substrate
+import numpy as np
+from matplotlib import pyplot as plt
+
+#Defining variables and constants
+ump = 0.24 #maximum specific growth rate for protozoa (hr^-1)
+umb = 0.25 #maximum specific growth rate for bacteria (hr^-1)
+Kb = 4E8 #saturation constant for bacteria (bacteria/mL)
+Ks = 5E-2 #saturation constant for substrate (mg of glucose/mL)
+Ypb = 7.14E-4 #yield coefficient of protozoa on bacteria (protozoa/bacteria)
+Ybs = 3.03E9 #yield coefficient of bacteria on substrate (bacteria/mg of glucose)
+D = 0.0625 #dilution rate
+S0 = 0.3  #feed concentration of glucose
+S = 0 #initial substrate concentration
+Xp = 1.4E4 #initial protozoa concentration
+Xb = 1.6E9 #initial bacteria concentration
+
+#Step size and number of iterations
+tf = 120
+t0 = 0
+n = 15001
+dt = (tf - t0)/(n-1)
+t = np.linspace(t0, tf, n)
+
+#initializing vectors for p (prey), b (bacteria), s (substrate) material balance
+p = np.zeros([n])
+b = np.zeros([n])
+s = np.zeros([n])
+
+p[0] = Xp
+b[0] = Xb
+s[0] = S
+
+
+#Euler method
+for i in range(1,n):
+    p[i]=dt*(-D*p[i-1]+ump*b[i-1]*p[i-1]/(Kb+b[i-1]))+p[i-1]
+
+    b[i]=dt*(-D*b[i-1]+umb*s[i-1]*b[i-1]/(Ks+s[i-1])-1/Ypb*ump*b[i-1]*p[i-1]/(Kb+b[i-1]))+b[i-1]
+
+    s[i]=dt*(D*(S0-s[i-1])-(1/Ybs*umb*s[i-1]*b[i-1])/(Ks+s[i-1]))+s[i-1]
+    
+    
+plt.plot(b, p,'--r')
+plt.title("Protozoa vs. time")
+plt.xlabel("bacteria")
+plt.ylabel("protozoa")
+plt.show()
+
+plt.plot(s, b,'--r')
+plt.title("Protozoa vs. time")
+plt.xlabel("substrate")
+plt.ylabel("bacteria")
+plt.show()
+
+#Answering part C of problem set
+
+import numpy as np
+from matplotlib import pyplot as plt
+
+#Defining variables and constants
+ump = 0.24 #maximum specific growth rate for protozoa (hr^-1)
+umb = 0.25 #maximum specific growth rate for bacteria (hr^-1)
+Kb = 4E8 #saturation constant for bacteria (bacteria/mL)
+Ks = 5E-2 #saturation constant for substrate (mg of glucose/mL)
+Ypb = 7.14E-4 #yield coefficient of protozoa on bacteria (protozoa/bacteria)
+Ybs = 3.03E9 #yield coefficient of bacteria on substrate (bacteria/mg of glucose)
+D = 0.152 #dilution rate
+S0 = 0.5  #feed concentration of glucose
+S = 0 #initial substrate concentration
+Xp = 1.4E4 #initial protozoa concentration
+Xb = 1.6E9 #initial bacteria concentration
+
+#Step size and number of iterations
+tf = 360
+t0 = 0
+n = 36001
+dt = (tf - t0)/(n-1)
+t = np.linspace(t0, tf, n)
+
+#initializing vectors for p (prey), b (bacteria), s (substrate) material balance
+p = np.zeros([n])
+b = np.zeros([n])
+s = np.zeros([n])
+
+p[0] = Xp
+b[0] = Xb
+s[0] = S
+
+
+#Euler method
+for i in range(1,n):
+    p[i]=dt*(-D*p[i-1]+ump*b[i-1]*p[i-1]/(Kb+b[i-1]))+p[i-1]
+
+    b[i]=dt*(-D*b[i-1]+umb*s[i-1]*b[i-1]/(Ks+s[i-1])-1/Ypb*ump*b[i-1]*p[i-1]/(Kb+b[i-1]))+b[i-1]
+
+    s[i]=dt*(D*(S0-s[i-1])-(1/Ybs*umb*s[i-1]*b[i-1])/(Ks+s[i-1]))+s[i-1]
+    
+    
+plt.plot(t, s,'--r')
+plt.title("substrate vs. time")
+plt.xlabel("time")
+plt.ylabel("substrate")
+plt.xlim([100, 350])
+plt.ylim([0.15, 0.3])
+plt.show()
